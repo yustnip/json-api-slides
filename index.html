@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shower Presentation Engine</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>Shower Presentation Engine</h1>
+        <p>Yours Truly, Famous Inc.</p>
+    </header>
+
+    <section class="slide" style="display: flex; flex-direction: column; justify-content: center; text-align: center;">
+        <h2>JSON:API - общаемся по стандарту</h2>
+        <p style="font-style: italic;">Никита Юстовский, Tvil.ru</p>
+    </section>
+
+    <section class="slide">
+        <h2>Что это?</h2>
+        <ol>
+            <li class="next">Как запросить?</li>
+            <li class="next">Как ответить?</li>
+        </ol>
+        <p class="next" style="font-style: italic;">
+            JSON:API - это спецификация, описывающая каким образом клиент должен запрашивать получение и изменение ресурсов,
+            а также как именно должен сервер отвечать на такие запросы.
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>Зачем?</h2>
+    </section>
+
+    <section class="slide">
+        <img class="cover" src="pictures/complicated.png" style="max-width: 110%;" alt="">
+    </section>
+
+    <section class="slide">
+        <h2>Преимущества</h2>
+        <p class="next">Общее соглашение как для фронтенда, так и для бэкенда</p>
+        <p class="next">Готовые инструменты</p>
+        <p class="next">Достаточно прост в освоении</p>
+    </section>
+
+    <section class="slide">
+        <h2>C<span style="color: #FF5061;">R</span>UD - Read</h2>
+        <pre>
+            <code>GET /products/?filter[country]=Russia&include=photos</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Ответ</h2>
+        <pre style="font-size: 0.8em;">
+            <code>200 OK</code>
+            <code>Content-Type: application/vnd.api+json</code>
+        </pre>
+        <pre style="font-size: 0.6em;">
+            <code>...</code>
+            <code>"data": [</code>
+            <code>  {</code>
+            <code>    "type": "products",</code>
+            <code>    "id": "123456",</code>
+            <code>    "attributes": {</code>
+            <code>      "name": "Томат",</code>
+            <code>      ...</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Связи</h2>
+        <pre style="font-size: 0.6em;">
+            <code>...</code>
+            <code>"relationships": {</code>
+            <code>  "photos": {</code>
+            <code>    "data": [</code>
+            <code>      {</code>
+            <code>        "type": "photos",</code>
+            <code>        "id": "123456"</code>
+            <code>        ...</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Связи</h2>
+        <pre style="font-size: 0.6em;">
+            <code>...</code>
+            <code>"included": [</code>
+            <code>  {</code>
+            <code>    "type": "photos",</code>
+            <code>    "id": "123456",</code>
+            <code>    "attributes": {</code>
+            <code>      "url": "https://json-api-slides.example/media/photos/123456"</code>
+            <code>      ...</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2><span style="color: #FF5061;">C</span>RUD - Create</h2>
+        <pre style="font-size: 0.6em;">
+            <code>POST /products</code>
+            <code>Content-Type: application/vnd.api+json</code>
+            <code>Accept: application/vnd.api+json</code>
+        </pre>
+        <pre style="font-size: 0.6em;">
+            <code>{</code>
+            <code>  "data": {</code>
+            <code>    "type": "products",</code>
+            <code>    "attributes": { "name": "Томат" }</code>
+            <code>      ...</code>
+            <code>  "relationships": {</code>
+            <code>    "trademark": {</code>
+            <code>      "data": { "type": "trademarks", "id": "123456" }</code>
+            <code>      ...</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>CR<span style="color: #FF5061;">U</span>D - Update</h2>
+        <pre style="font-size: 0.6em;">
+            <code>PATCH /products/123456</code>
+            <code>Content-Type: application/vnd.api+json</code>
+            <code>Accept: application/vnd.api+json</code>
+        </pre>
+        <pre style="font-size: 0.6em;">
+            <code>...</code>
+            <code>"data": {</code>
+            <code>  "type": "products",</code>
+            <code>  "id": "123456",</code>
+            <code>  "attributes": {</code>
+            <code>    "name": "Помидор",</code>
+            <code>    ...</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>CRU<span style="color: #FF5061;">D</span></h2>
+        <pre>
+            <code>DELETE /products/123456</code>
+            <code>Accept: application/vnd.api+json</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Инструменты на фронтенде</h2>
+        <p><a href="https://jsonapi.org/implementations/#client-libraries-javascript">https://jsonapi.org/implementations/#client-libraries-javascript</a></p>
+        <div class="next">
+            <h3 style="margin-bottom: 0;">Devour</h3>
+            <div><a href="https://github.com/twg/devour">https://github.com/twg/devour</a></div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Devour - быстрый старт</h2>
+        <pre>
+            <code>GET /products/?filter[country]=Russia&include=photos</code>
+        </pre>
+        <pre style="font-size: 0.6em;">
+            <code>import JsonApi from 'devour-client'</code>
+            <code>const jsonApi = new JsonApi({ apiUrl:'https://json-api-slides.example' })</code>
+            <code>  </code>
+            <code>jsonApi.define('product', { name: '' })</code>
+            <code>jsonApi.findAll('product', { filter: { country: 'Russia' }, include: 'photos' })</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Devour - связи</h2>
+        <pre style="font-size: 0.6em;">
+            <code>jsonApi.define('photo', {</code>
+            <code>  id: '',</code>
+            <code>  url: '',</code>
+            <code>})</code>
+            <code>  </code>
+            <code>jsonApi.define('product', {</code>
+            <code>  name: '',</code>
+            <code>  photos: {</code>
+            <code>    jsonApi: 'hasMany',</code>
+            <code>    type: 'photos',</code>
+            <code>  }</code>
+            <code>})</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Альтернативы</h2>
+        <ul>
+            <li class="next">OData</li>
+            <li class="next">OpenAPI</li>
+            <li class="next">GraphQL 🤯</li>
+        </ul>
+    </section>
+
+    <section class="slide" style="display: flex; flex-direction: column; justify-content: center; text-align: center;">
+        <h2 style="text-align: center;">Спасибо!</h2>
+    </section>
+
+    <footer class="badge">
+        <a href="https://github.com/shower/shower">Fork me on GitHub</a>
+    </footer>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.min.js"></script>
+    <!-- Copyright © 2018 Yours Truly, Famous Inc. -->
+
+</body>
+</html>
